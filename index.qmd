@@ -1,0 +1,138 @@
+---
+title: "PENGARUH KONSUMSI ROKOK DENGAN PENYAKIT TUBERKULOSIS DI INDONESIA"
+subtitle: "Metode Penelitian Politeknik APP Jakarta"
+author: "Iqbal Ardyas Pratama"
+date: 2024-01-04
+number-sections: true
+format:
+  html: default
+  docx: default
+---
+![](poltekapp.jpg)
+
+
+## Pendahuluan
+
+### Latar belakang
+
+Tuberkulosis (TB) tetap menjadi masalah kesehatan global yang signifikan, meskipun kemajuan dalam diagnosis dan pengobatan. World Health Organization (WHO) melaporkan bahwa jutaan orang terinfeksi Tuberculosis setiap tahunnya, dengan jutaan lainnya meninggal akibat penyakit ini. Di samping itu, TB menjadi ancaman kesehatan masyarakat karena dapat menyebar melalui udara dan berkaitan erat dengan kondisi lingkungan serta faktor risiko tertentu.
+
+Salah satu faktor risiko yang perlu mendapat perhatian serius adalah konsumsi rokok. Rokok telah dikenal sebagai penyebab berbagai penyakit pernapasan, dan penelitian sebelumnya menunjukkan hubungan antara merokok dan risiko terkena Tuberculosis. Dan penelitian ini membahas pengaruh konsumsi rokok terhadap insiden tuberkulosis di Indonesia
+
+### Ruang lingkup
+
+Ruang lingkup pembahasan masalah sesuai dengan variable yang akan digunakan dalam analisis ini, yaitu mengenai konsumsi rokok terhadap penyakit tuberkulosis di Indonesia dari tahun 2015 hingga 2018. Batasan masalah ini berperan membantu dalam mengidentifikasi masalah yang akan dibahas dan membatasi jangkauan proses yang dibahas.
+
+### Rumusan masalah
+
+1. Apakah terdapat pengaruh antara konsumsi rokok terhadap peningkatan insiden tuberkulosis ?
+2. Apakah faktor-faktor lain, seperti intensitas merokok memiliki pengaruh yang berbeda terhadap insiden tuberkulosis?
+
+### Tujuan dan manfaat penelitian
+
+Tujuan penelitian ini Untuk mengevaluasi apakah ada hubungan yang signifikan antara konsumsi rokok dan peningkatan insiden tuberkulosis pada populasi di Indonesia.
+
+Manfaat penelitian ini untuk memberikan kontribusi terhadap pemahaman ilmiah tentang hubungan antara konsumsi rokok dan risiko tuberkulosis, yang dapat digunakan sebagai dasar untuk pengembangan kebijakan kesehatan masyarakat.
+
+
+
+### Package
+
+Packages yang digunakan antara lain sebagai berikut:
+
+```{r}
+#| warning: false
+#| echo: true
+library(tidyverse)
+library(readxl)
+library("ggplot2")
+library("dplyr")
+```
+
+## Studi pustaka
+
+Data dari Badan Penelitian dan Pengembangan Kesehatan (Litbangkes) menunjukkan bahwa mereka yang merokok (termasuk mereka yang masih merokok dan yang telah berhenti merokok) mempunyai risiko menderita TB 3 kali lebih tinggi dibandingkan dengan mereka yang tidak merokok. Paparan tembakau baik secara aktif maupun pasif dapat meningkatkan risiko terkena sakit TB. Risiko terkena TB akan meningkat 9 kali lipat bila ada 1 perokok dalam satu rumah (Kemenkes RI, 2013)
+
+## Metode penelitian
+
+### Data
+
+| Tahun  | Konsumsi rokok  | insiden tbc  |
+|--------|-----------------|--------------|
+| 2015   |     348,1       | 130          |
+| 2016   |     341,7       | 139          |
+| 2017   |     336,3       | 169          |
+| 2018   |     331,9       | 214          |
+
+
+
+![BPS LOGO](BPSLOGO.jpeg)
+
+penelitian ini menggunakan data Konsumsi Rokok dari Databoks dan Insiden Tuberkulosis dari Badan Pusat Statistik(BPS)
+
+```{r}
+library("readxl")
+dat<-read_excel("Konsumsi rokok dan tbc 2015-2018.xlsx")
+head(dat)
+```
+
+```{r}
+library("ggplot2")
+library("dplyr")
+ggplot(data=dat,aes(x=x,y=y))+
+  geom_point(color="black",size=2)+
+  labs(title="Tabel 1 Hubungan antara konsumsi rokok dengan insiden tuberkulosis",
+       x="konsumsi rokok",
+       y="insiden tuberkulosis",
+       caption="sumber: databoks.katadata.co.id, Badan Pusat Statistik")+
+  theme_classic()
+```
+
+### Metode analisis
+
+Metode yang dipilih adalah regresi univariat atau Ordinary Least Square (OLS) dengan 1 variabel independen. Penelitian ini bermaksud mencari hubungan antara Konsumsi Rokok dan Insiden Tuberkulosis. Spesifikasi yang dilakukan adalah:
+
+$$
+y_{t}=\beta_0 + \beta_1 x_t+\mu_t
+$$ di mana $y_t$ adalah Konsumsi Rokok dan $x_t$ adalah Insiden Tuberkulosis.
+
+## Pembahasan
+
+### Pembahasan masalah
+
+Karena saya memanfaatkan metode Ordinary Least Squares (OLS), dalam analisis saya hanya mengaitkan Konsumsi Rokok dengan Insiden Tuberkulosis. Saya menggabungkan data kedua variabel tersebut untuk menjalankan analisis regresi, dan hasilnya dapat dilihat dalam format sebagai berikut.
+
+```{r}
+library("readxl")
+dat<-read_excel("Konsumsi rokok dan tbc 2015-2018.xlsx")
+head(dat)
+```
+
+### Analisis masalah
+
+Hasil regresinya adalah
+
+```{r}
+reg1<-lm(y~x,data=dat)
+summary(reg1)
+```
+
+
+## Kesimpulan
+
+Hasil analisis menunjukkan bahwa koefisien regresi untuk konsumsi rokok adalah -5.064, menandakan bahwa setiap peningkatan unit dalam konsumsi rokok berhubungan dengan penurunan sekitar 5.064 unit dalam insiden tuberkulosis. Meskipun nilai koefisien tersebut tidak mencapai tingkat signifikansi yang umumnya diakui pada 0.05 (p-value = 0.0645), namun mendekati tingkat tersebut, menunjukkan potensi adanya dampak yang signifikan. Jadi dapat disimpulkan bahwa Terdapat indikasi pengaruh konsumsi rokok yang potensial menunjukkan bahwa konsumsi rokok dapat memiliki peran penting dalam menjelaskan variasi pada insiden tuberkulosis.
+
+
+## Referensi
+Badan Pusat Statistik. (n.d.). Insiden Tuberkulosis (ITB) Per 100.000 Penduduk, 2013-2015. Retrieved January 10, 2024, from https://www.bps.go.id/id/statistics-table/2/MTM5MCMy/insiden-tuberkulosis--itb--per-100-000-penduduk.html
+
+Ernawati, K., Susila B. Duarsa, A., Wulansari, R., & Zamzami, L. (2017). Hubungan Merokok Dengan Kejadian Tuberkulosis Paru di Provinsi Sulawesi Utara Berdasarkan Data Riskesdas Tahun 2010. JURNAL KEDOKTERAN YARSI, 1, 033–040.
+
+Mutia Annur, C. (2021). Berapa Jumlah Konsumsi Rokok Masyarakat Indonesia Per Tahun? https://databoks.katadata.co.id/datapublish/2021/12/15/berapa-jumlah-konsumsi-rokok-masyarakat-indonesia-per-tahun
+
+Shafa Pratama Bintang, R. (2023). Pengaruh Jumlah Penduduk Miskin terhadap Angka Partisipasi Murni umur 16-19 tahun Pendidikan Indonesia tahun 2012 di Jawa Barat, Jawa Tengah, dan Jawa Timur. https://rajashafa.github.io/
+
+
+
+
+
